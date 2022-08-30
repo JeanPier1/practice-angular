@@ -7,6 +7,7 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { ProgressComponent } from './progress/progress.component';
 import { PagesComponent } from './pages.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { SharedModule } from '../shared/shared.module';
     ProgressComponent,
     PagesComponent
   ],
-  imports: [CommonModule, PagesRoutingModule,SharedModule ],
+  imports: [CommonModule, FormsModule, PagesRoutingModule,SharedModule ],
 })
 export class PagesModule {}
