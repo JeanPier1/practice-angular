@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { NgChartsModule } from 'ng2-charts';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NgChartsModule } from 'ng2-charts';
     Grafica1Component,
     ProgressComponent,
     PagesComponent,
+    AccountSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -25,5 +27,6 @@ import { NgChartsModule } from 'ng2-charts';
     PagesRoutingModule,
     SharedModule,
   ],
+  exports: [AccountSettingsComponent],
 })
 export class PagesModule {}
