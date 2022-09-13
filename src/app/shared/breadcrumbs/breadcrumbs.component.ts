@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivationEnd, Router } from '@angular/router';
+import { filter, map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.css']
+  styleUrls: ['./breadcrumbs.component.css'],
 })
-export class BreadcrumbsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class BreadcrumbsComponent implements OnInit, OnDestroy {
+  public titulo: string = 'Blank Page';
+  public tituloSubs$: Subscription;
+  constructor(private router: Router) {
+    this.tituloSubs$ = this.getArgumentosRuta().subscribe(({ titulo }) => {
+      this.titulo = titulo;
+      document.title = `AdminPro - ${titulo}`;
+    });
   }
 
+  ngOnInit(): void {}
+
+  getArgumentosRuta() {
+    return this.router.events.pipe(
+      filter((event: any) => event instanceof ActivationEnd),
+      filter((event: ActivationEnd) => event.snapshot.firstChild === null),
+      map((event: ActivationEnd) => event.snapshot.data)
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.tituloSubs$.unsubscribe();
+  }
 }
